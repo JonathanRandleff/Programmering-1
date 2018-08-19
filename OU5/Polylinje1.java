@@ -1,7 +1,5 @@
 package OU5;
 
-import java.util.Arrays;
-
 public class Polylinje1
 {
     private Punkt[] horn;

@@ -17,7 +17,6 @@ class ValjPolylinje
         for (int i = 0; i < ANTAL_POLYLINJER; i++) {
             System.out.println("Linje: " + (i+1) + " " + polylinjer[i] + polylinjer[i].getFarg());
     }
-
 // bestäm den kortaste av de polylinjer som är gula
         int tempValue = 0;
         Polylinje kortasteGul = new Polylinje();
