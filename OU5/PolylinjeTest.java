@@ -8,6 +8,7 @@ public class PolylinjeTest {
 
     Scanner in = new Scanner(System.in);
 
+    // Skapar ett par punkter som kan användas till polylinjen.
     Punkt p1 = new Punkt("A", 3, 4);
     Punkt p2 = new Punkt("B", 5, 6);
     Punkt p3 = new Punkt("C", 8, 2);
@@ -51,7 +52,10 @@ public class PolylinjeTest {
         linje1.taBort("B");
         System.out.println(linje1 + "\n");
 
+        // Skapar iterator
         Polylinje.PolylinjeIterator polyIter = linje1.new PolylinjeIterator();
+
+        // Går via iteratorn igenom linjen ett steg i taget tills slutet.
         while (polyIter.finnsHorn()) {
             System.out.println(polyIter.horn());
             polyIter.gaFram();
