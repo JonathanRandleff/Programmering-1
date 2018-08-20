@@ -52,7 +52,7 @@ public class PolylinjeTest {
         linje1.taBort("B");
         System.out.println(linje1 + "\n");
 
-        // Skapar iterator
+        // Skapar iterator objekt
         Polylinje.PolylinjeIterator polyIter = linje1.new PolylinjeIterator();
 
         // Går via iteratorn igenom linjen ett steg i taget tills slutet.
