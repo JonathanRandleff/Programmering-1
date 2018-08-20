@@ -1,37 +1,40 @@
 package OU3;
 
 public class DenKortasteVagen {
-    //metoder
-    //en metod för algoritm, anropa med de tre olika parametersekvenserna?
-    public static double[] mellanstationer (double[] a, double[][] b, double[] c)
-    {
-        int n = 4;
-        double min1 = a[0];
-        double min2 = b[0][0];
-        double min3 = c[0];
-        double [] stat = new double [n];
-        for (int i = 0; i<3; i++)
-        {
-            if (a[i]<min1)
-                min1 = a[i];
-            if (min1 == a[i])
-                System.out.print ("Kortaste vägen är först mellan station X och U" + (i+1) + ". ");
-            for (int j = 0; j<4; j++)
-            {
-                if (b[i][j]<min2)
-                    min2 = b[i][j];
-                if (min2 == b[i][j])
-                    System.out.print("Den kortaste vägen från andra stationen är till V" + (i+j+1) + " och därefter till station Y.");
-                if (c[j]<min3)
-                    min3 = c[j];
+
+    /**
+     * En metod som räknar ut den kortaste vägen och returnerar vilka mellanstationer som ger denna väg
+     * @param a Stationerna vid sträckan X - U
+     * @param b Stationerna vid sträckan U - V
+     * @param c Stationerna vid sträckan V - Y
+     * @return En array med de mellanstationer på den kortaste vägen
+     */
+    public static int[] mellanstationer (double[] a, double[][] b, double[] c) {
+        double tempo = 1000000;
+        int [] kortastVag = new int [2];
+        for (int i = 0; i<3; i++) {
+            for (int j = 0; j<4; j++) {
+                double xu = a[i];
+                double uv = b[i][j];
+                double vy = c[j];
+                double totalLängd = xu+uv+vy;
+                if (totalLängd < tempo) {
+                    kortastVag[0] = i+1;
+                    kortastVag[1] = j+1;
+                    tempo = totalLängd;
+                }
             }
         }
-        stat [0] = min1;
-        stat [1] = min2;
-        stat [2] = min3;
-        return stat;
+        return kortastVag;
     }
 
+    /**
+     * Räknar ut längden för den kortaste vägen.
+     * @param a Stationerna vid sträckan X - U
+     * @param b Stationerna vid sträckan U - V
+     * @param c Stationerna vid sträckan V - Y
+     * @return Längden mellan X och Y med den kortaste vägen.
+     */
     public static double langd (double[] a, double[][] b, double[] c)
     {
         int n = 12;
@@ -41,10 +44,10 @@ public class DenKortasteVagen {
             for (int j = 0; j<4; j++)
             {
                 int temp =+ j + (4*i);
-                double aa = a[i];
-                double bb = b[i][j];
-                double cc = c[j];
-                double totalLängd = aa+bb+cc;
+                double xu = a[i];
+                double uv = b[i][j];
+                double vy = c[j];
+                double totalLängd = xu+uv+vy;
                 System.out.println ("Längd för X, U" + (i+1) + ", V" + (j+1) + ", Y: " + totalLängd);
                 längder[temp] = totalLängd;
             }
