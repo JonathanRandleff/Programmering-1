@@ -69,6 +69,10 @@ class ValjPolylinje
         return polylinje;
     }
 
+    /**
+     * Slumpar en färg för polylinjen.
+     * @return färgen
+     */
     public static String slumpFarg() {
         String colour;
         int colourCode = rand.nextInt(3);

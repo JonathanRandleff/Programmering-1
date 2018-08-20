@@ -11,8 +11,7 @@ public class Polylinje
     /**
      * Konstruktor
      */
-    public Polylinje ()
-    {
+    public Polylinje () {
         this.horn = new Punkt[0];
     }
 
@@ -110,10 +109,12 @@ public class Polylinje
      * @param hornNamn Namnet på punkten man vill lägga den nya framför.
      */
     public void laggTillFramfor (Punkt horn, String hornNamn) {
-        Punkt newhorn = new Punkt(horn); // Make a new copy of the object referenced
-        Punkt[] nyhorn = new Punkt[this.horn.length + 1]; // Create an array one index longer than horn
+        // Skapar en kopia av det refererade objektet
+        Punkt newhorn = new Punkt(horn);
+        // Skapar en array ett index längre än horn
+        Punkt[] nyhorn = new Punkt[this.horn.length + 1];
 
-        // Loop until the name provided shows up
+        // Loop till namnet "hornNamn" hittas. Sparar indexetplatsen.
         int index = 0;
         for (int i = 0; i < this.horn.length; i++) {
             if (this.horn[i].getNamn().equals(hornNamn)) {
@@ -121,11 +122,12 @@ public class Polylinje
                 break;
             }
         }
+        // Loop som sparar värderna i en array, när den gått förbi "index"
+        // så plussar den på 1 för att få en förskjutning.
         for (int i = 0; i < nyhorn.length - 1; i++) {
             nyhorn[i < index ? i : i + 1] = this.horn[i];
         }
         nyhorn[index] = newhorn;
-
         this.horn = nyhorn;
     }
 
@@ -134,9 +136,10 @@ public class Polylinje
      * @param hornNamn Namnet på den punkten man vill ta bort från polylinjen.
      */
     public void taBort (String hornNamn) {
-        Punkt[] newhorn = new Punkt[this.horn.length - 1]; // Create an array one index longer than horn
+        // Skapar en array ett index längre än horn
+        Punkt[] newhorn = new Punkt[this.horn.length - 1];
 
-        // Loop until the name provided shows up
+        // Loop till namnet "hornNamn" hittas. Sparar indexetplatsen.
         int index = 0;
         for (int i = 0; i < this.horn.length; i++) {
             if (this.horn[i].getNamn().equals(hornNamn)) {
@@ -150,35 +153,30 @@ public class Polylinje
         for (int j = index; j < newhorn.length; j++) {
             newhorn[j] = this.horn[j + 1];
         }
-
         this.horn = newhorn;
     }
 
     /**
      * En itterator som går igenom polylinjen ett steg i taget.
      */
-    public class PolylinjeIterator
-    {
+    public class PolylinjeIterator {
         private int aktuell = -1;
-        public PolylinjeIterator ()
-        {
+
+        public PolylinjeIterator () {
             if (Polylinje.this.horn.length > 0)
                 aktuell = 0;
         }
-        public boolean finnsHorn ()
-        {
+        public boolean finnsHorn () {
             return aktuell != -1;
         }
-        public Punkt horn () throws java.util.NoSuchElementException
-        {
+        public Punkt horn () throws java.util.NoSuchElementException {
             if (!this.finnsHorn ())
                 throw new java.util.NoSuchElementException (
                         "slut av iterationen");
             Punkt horn = Polylinje.this.horn[aktuell];
             return horn;
         }
-        public void gaFram ()
-        {
+        public void gaFram () {
             if (aktuell >= 0 &&
                     aktuell < Polylinje.this.horn.length - 1)
                 aktuell++;
