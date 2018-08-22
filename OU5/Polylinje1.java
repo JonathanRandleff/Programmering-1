@@ -12,7 +12,7 @@ public class Polylinje1
     public Polylinje1 (Punkt[] horn) {
         this.horn = new Punkt[horn.length];
         for (int i = 0; i < horn.length; i++)
-            this.horn[i] = new Punkt (horn[i]);
+            this.horn[i] =  (horn[i]);
     }
     public String toString () {
         StringBuilder description = new StringBuilder();
@@ -49,8 +49,10 @@ public class Polylinje1
         int i = 0;
         for (i = 0; i < this.horn.length; i++)
             h[i] = this.horn[i];
-        h[i] = new Punkt (horn);
+        h[i] = horn;
         this.horn = h;
+
+
     }
     public void laggTillFramfor (Punkt horn, String hornNamn) {
 

@@ -18,14 +18,15 @@ class ValjPolylinje
             System.out.println("Linje: " + (i+1) + " " + polylinjer[i] + polylinjer[i].getFarg());
     }
 // bestäm den kortaste av de polylinjer som är gula
-        int tempValue = 0;
-        Polylinje kortasteGul = new Polylinje();
+        Polylinje kortasteGul = null;
         for (int i = 0; i < ANTAL_POLYLINJER; i++) {
             if (polylinjer[i].getFarg().equals("gul")) {
-                if (polylinjer[i].langd() <= polylinjer[tempValue].langd()) {
+                if (kortasteGul == null) {
                     kortasteGul = polylinjer[i];
                 }
-                tempValue=i;
+                else if (polylinjer[i].langd() < kortasteGul.langd()) {
+                    kortasteGul = polylinjer[i];
+                }
             }
         }
 // visa den valda polylinjen

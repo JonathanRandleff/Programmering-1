@@ -32,37 +32,41 @@ class OperationerMedNaturligaHeltalGivnaSomTeckenstrangar
 	{
         int siffra1 = 0;
         int siffra2 = 0;
-        int summa = 0;
-        int x = 1;
+        int carry = 0;
         int length1 = tal1.length() - 1;
         int length2 = tal2.length() - 1;
+        StringBuilder builder = new StringBuilder();
+        int summa = 0;
+        int siffra = 0;
         
-        while (length1 >= 0 && length2 >= 0)
-        {
+        while (length1 >= 0 && length2 >= 0) {
             siffra1 = tal1.charAt(length1) - 48;
             siffra2 = tal2.charAt(length2) - 48;
-            summa += (siffra1 + siffra2) * x;
-            x = x*10;
+
+            summa = carry + siffra1 + siffra2;
+            siffra = summa % 10;
+            builder.insert(0, siffra);
+            carry = summa/10;
             length1 --;
             length2 --;
         }
-        while (length1 >= 0)
-        {
+        while (length1 >= 0) {
             siffra1 = tal1.charAt(length1) - 48;
-            summa += siffra1*x;
-            x = x*10;
+            summa = carry + siffra1;
+            siffra = summa % 10;
+            builder.insert(0, siffra);
+            carry = summa/10;
             length1 --;
         }
-        while (length2 >= 0)
-        {
+        while (length2 >= 0) {
             siffra2 = tal2.charAt(length2) - 48;
-            summa += siffra2*x;
-            x = x*10;
+            summa = carry + siffra2;
+            siffra = summa % 10;
+            builder.insert(0, siffra);
+            carry = summa/10;
             length2 --;
         }
-        String summaString = null;
-        summaString = Integer.toString(summa);
-        return summaString;
+        return builder.toString();
 	}
 	
 	// subtrahera tar emot två naturliga heltal givna som teckensträngar, och returnerar
@@ -72,37 +76,50 @@ class OperationerMedNaturligaHeltalGivnaSomTeckenstrangar
 	{
         int siffra1 = 0;
         int siffra2 = 0;
-        int summa = 0;
-        int x = 1;
+        int diff = 0;
         int length1 = tal1.length() - 1;
         int length2 = tal2.length() - 1;
+        StringBuilder builder = new StringBuilder();
+        int carry = 0;
         
         while (length1 >= 0 && length2 >= 0)
         {
             siffra1 = tal1.charAt(length1) - 48;
             siffra2 = tal2.charAt(length2) - 48;
-            summa += (siffra1 - siffra2) * x;
-            x = x*10;
+            diff = siffra1-siffra2-carry;
+
+            if (diff < 0)
+            {
+                diff+=10;
+                carry=1;
+            }
+            else
+                carry=0;
+
+            builder.insert(0, diff);
             length1 --;
             length2 --;
         }
         while (length1 >= 0)
         {
             siffra1 = tal1.charAt(length1) - 48;
-            summa += siffra1*x;
-            x = x*10;
+            diff = siffra1-carry;
+
+            if (diff < 0)
+            {
+                diff+=10;
+                carry=1;
+            }
+            else
+                carry=0;
+            builder.insert(0, diff);
             length1 --;
         }
         while (length2 >= 0)
         {
-            siffra2 = tal2.charAt(length2) - 48;
-            summa += siffra2*x;
-            x = x*10;
-            length2 --;
+            builder.append("Tal 1 måste vara större än tal 2");
         }
-        String differensString = null;
-        differensString = Integer.toString(summa);
-        return differensString;
+        return builder.toString();
 	}
 
 	// visa visar två givna naturliga heltal, och resultatet av en aritmetisk operation
