@@ -82,14 +82,12 @@ class OperationerMedNaturligaHeltalGivnaSomTeckenstrangar
         StringBuilder builder = new StringBuilder();
         int carry = 0;
         
-        while (length1 >= 0 && length2 >= 0)
-        {
+        while (length1 >= 0 && length2 >= 0) {
             siffra1 = tal1.charAt(length1) - 48;
             siffra2 = tal2.charAt(length2) - 48;
             diff = siffra1-siffra2-carry;
 
-            if (diff < 0)
-            {
+            if (diff < 0) {
                 diff+=10;
                 carry=1;
             }
@@ -100,13 +98,11 @@ class OperationerMedNaturligaHeltalGivnaSomTeckenstrangar
             length1 --;
             length2 --;
         }
-        while (length1 >= 0)
-        {
+        while (length1 >= 0) {
             siffra1 = tal1.charAt(length1) - 48;
             diff = siffra1-carry;
 
-            if (diff < 0)
-            {
+            if (diff < 0) {
                 diff+=10;
                 carry=1;
             }
@@ -115,8 +111,7 @@ class OperationerMedNaturligaHeltalGivnaSomTeckenstrangar
             builder.insert(0, diff);
             length1 --;
         }
-        while (length2 >= 0)
-        {
+        while (length2 >= 0) {
             builder.append("Tal 1 måste vara större än tal 2");
         }
         return builder.toString();
